@@ -1,1 +1,62 @@
 This project is a test suite for the Wf4Ever Research Object API, first protoype, using DropBox for the user interface.
+
+
+== Test outline ==
+
+At this stage, I propose to implement some basic tests that operate on a DropBox 
+folder as simple BASH shell scripts and RDF command-line tools, according to the 
+main scenario described at 
+http://www.wf4ever-project.org/wiki/display/docs/Research+Objects+Store+and+Retrieve+Service.
+
+
+1. Test create research object
+
+- create manifest.rdf file in dropbox directory
+- wait
+- read back manifest: look for additional SRS metadata added
+
+
+2. Add data to RO
+
+- create new data file in dropbox directory for existing RO
+- wait
+- read back manifest: look for updated ORE description
+
+
+3. Modify data in RO
+
+- update existing data file in dropbox directory for existing RO
+- wait
+- read back manifest: look for updated ORE description metadata
+
+
+4. Delete data in RO
+
+- delete existing data file in dropbox directory for existing RO
+- wait
+- read back manifest: look for updated ORE description with component removed
+
+
+5. Test modify research object metadata
+
+- write new manifest.rdf for existing RO to change descriptive metadata
+- wait
+- look for indication that change has been noted by SRS (how?)
+
+
+6. Test create new research object version
+
+- write new manifest.rdf for existing RO with existing data to change version ID
+- modify data file in dropbox directory
+- wait
+- read back manifest: look for updated ORE version
+
+
+7. Test revert research object version
+
+Following on from test case 6:
+
+- write new manifest.rdf for existing RO to revert version ID
+- wait
+- read back manifest: look for updated ORE version and metadata
+- read back data file: look for reversion to old version content

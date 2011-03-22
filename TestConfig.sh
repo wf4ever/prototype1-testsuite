@@ -8,7 +8,8 @@
 #
 
 ARQROOT="./ARQ-2.8.7/"
-DropBoxDir="./data"
+#DropBoxDir="./data"
+DropBoxDir="/home/graham/Dropbox/ROs"
 
 # Perform SPARQL ASK query against RDF file
 #

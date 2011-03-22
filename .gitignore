@@ -1,0 +1,13 @@
+# Untracked files
+
+# Editor backup files
+*~
+
+# On-the-fly generated manifest files
+*-manifest.rdf
+
+# On-the-fly generated manifest SPARQL queries
+*-manifest-query.sparql
+
+# End.
+

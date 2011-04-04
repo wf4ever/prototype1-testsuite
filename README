@@ -11,8 +11,9 @@ http://www.wf4ever-project.org/wiki/display/docs/Research+Objects+Store+and+Retr
 
 1. Test create research object
 
-- create manifest.rdf file in dropbox directory
+- create directory for new RO in dropbox ROs directory
 - wait
+- check manifest file has been created
 - read back manifest: look for additional SRS metadata added
 
 
@@ -60,6 +61,7 @@ Following on from test case 6:
 - wait
 - read back manifest: look for updated ORE version and metadata
 - read back data file: look for reversion to old version content
+
 
 == DropBox interface ==
 

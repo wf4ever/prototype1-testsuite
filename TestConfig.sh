@@ -9,7 +9,8 @@
 
 ARQROOT="./ARQ-2.8.7/"
 #DropBoxDir="./data"
-DropBoxDir="/home/graham/Dropbox/ROs"
+#DropBoxDir="/home/graham/Dropbox/ROs"
+DropBoxDir="/Users/graham/Dropbox/ROs"
 
 # Perform SPARQL ASK query against RDF file
 #
@@ -25,3 +26,4 @@ function arq_query_ask ()
     ${ARQROOT}/bin/arq --data=$1 --query="$2" --results=JSON | grep -q "\"boolean\" : true"
     #echo "Result $?"
 }
+

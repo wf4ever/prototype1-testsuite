@@ -21,6 +21,7 @@ echo " - Create local RO instance"
 
 mkdir -p ${DropBoxDir}/TestRO1
 
+# Expected initial manifest @@TODO is this really required?
 cat >TestRO1-manifest.rdf - <<END
 <?xml version="1.0" encoding="utf-8"?>
 <rdf:RDF
@@ -45,15 +46,16 @@ prefix oxds:    <http://vocab.ox.ac.uk/dataset/schema#>
 ASK { ?s dcterms:identifier "TestRO1" }
 END
 
-cp TestRO1-manifest.rdf ${DropBoxDir}/TestRO1/manifest.rdf
+# Don't do this:  RObox should create the manifest
+# cp TestRO1-manifest.rdf ${DropBoxDir}/TestRO1/manifest.rdf
 
-echo " - Waiting for SRS to create RO and update metadata"
+echo " - Waiting for SRS to create RO and metadata"
 sleep 5
 
-echo " - Read back manifest: look for additional SRS metadata added"
+echo " - Look for manifest with SRS metadata"
 
-if cmp -s TestRO1-manifest.rdf ${DropBoxDir}/TestRO1/manifest.rdf; then
-    echo "TestCreateRO - FAIL: manifest.rdf not updated"
+if [ ! -e ${DropBoxDir}/TestRO1/manifest.rdf ] ; then
+    echo "TestCreateRO - FAIL: manifest.rdf not created"
     exit 1
 else
     # test new manifest contents

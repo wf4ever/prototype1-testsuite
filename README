@@ -60,3 +60,7 @@ Following on from test case 6:
 - wait
 - read back manifest: look for updated ORE version and metadata
 - read back data file: look for reversion to old version content
+
+== DropBox interface ==
+
+For DropBox test account details, see http://www.wf4ever-project.org/wiki/pages/viewpage.action?pageId=1180279 (restricted access)

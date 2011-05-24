@@ -9,8 +9,15 @@
 
 ARQROOT="./ARQ-2.8.7/"
 #DropBoxDir="./data"
-#DropBoxDir="/home/graham/Dropbox/ROs"
-DropBoxDir="/Users/graham/Dropbox/ROs"
+DropBoxDir="/usr/workspace/prototype1-testsuite/ROSRS_DropBox/Dropbox/ROs"
+
+# Displayed at http://robox.wf4ever-project.org/dashboard/dropbox
+#
+#   ROBox ID:	 http://robox.wf4ever-project.org/dropbox_accounts/1/ro_containers/17
+#   Path in Dropbox:	 ROs
+#   Workspace ID (for ROSRS):	 dbox-lc9XgA87QGeyPNEz6k519Q
+#   Workspace Password (for ROSRS):	 d41d8cd98f00b204e9800998ecf8427e
+#
 
 # Perform SPARQL ASK query against RDF file
 #
@@ -27,3 +34,13 @@ function arq_query_ask ()
     #echo "Result $?"
 }
 
+# Synchronize RO SRS with updated DropBox contents
+function sync_RO_SRS ()
+{
+    curl http://robox.wf4ever-project.org/dropbox_accounts/1/ro_containers/2/force_sync \
+         --data-binary @- -H "Content-Type: application/json" <<____endpostdata
+        {
+        'password': 'd41d8cd98f00b204e9800998ecf8427e'
+        }
+____endpostdata
+}

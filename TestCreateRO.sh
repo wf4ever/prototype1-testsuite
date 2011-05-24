@@ -10,24 +10,28 @@
 # Prerequisites:
 #   ${DropBoxDir}
 #       connects via DropBox to a storage area that is being monitored by
-#       the RO SRS DropBox interface shim
+#       the RO SRS DropBox interface shim.  Defined in TestConfig.sh.
 #   ARQ-2.8.7
 #       for SparQL queries over manifest
 
+#@@TODO remove this?
 export ARQROOT=$(pwd)/ARQ-*/
 
+# ----------------------------------------------------------------
 
-# Ensure RO name is unique
+echo "TestCreateRO - START: Test create RO"
+
+source TestConfig.sh
+
+# Generate unique name for RO
+
 if (type -P uuidgen 2>/dev/null >/dev/null); then 
     RO="TestRO$(uuidgen)"
 else 
     RO="TestRO$$"
 fi
 
-
-echo "TestCreateRO - START: Test create RO"
-
-source TestConfig.sh
+# ----------------------------------------------------------------
 
 echo " - Create local RO instance ${RO}"
 
@@ -61,8 +65,14 @@ END
 # Don't do this:  RObox should create the manifest
 # cp ${RO}-manifest.rdf ${DropBoxDir}/${RO}/manifest.rdf
 
+# ----------------------------------------------------------------
+
 echo " - Waiting for SRS to create RO and metadata"
-sleep 180
+
+sync_RO_SRS
+sleep 1
+
+# ----------------------------------------------------------------
 
 echo " - Look for manifest with SRS metadata"
 
@@ -76,6 +86,8 @@ else
         exit 1
     fi
 fi
+
+# ----------------------------------------------------------------
 
 echo "TestCreateRO - SUCCESS"
 exit 0

@@ -9,7 +9,7 @@
 
 ARQROOT="./ARQ-2.8.7/"
 #DropBoxDir="./data"
-DropBoxDir="/usr/workspace/prototype1-testsuite/ROSRS_DropBox/Dropbox/ROs"
+DropBoxDir="/usr/workspace/prototype1-testsuite/ROSRS_DropBox/Dropbox/prototype1-testsuite"
 
 # Displayed at http://robox.wf4ever-project.org/dashboard/dropbox
 #
@@ -30,17 +30,19 @@ function arq_query_ask ()
 {
     #echo "File $1"
     #echo "Query $2"
-    ${ARQROOT}/bin/arq --data=$1 --query="$2" --results=JSON | grep -q "\"boolean\" : true"
+    ${ARQROOT}/bin/arq --data=$1 --query= "$2" --results=JSON | grep -q "\"boolean\" : true"
     #echo "Result $?"
 }
 
 # Synchronize RO SRS with updated DropBox contents
 function sync_RO_SRS ()
 {
-    curl http://robox.wf4ever-project.org/dropbox_accounts/1/ro_containers/2/force_sync \
+    roboxid="http://robox.wf4ever-project.org/dropbox_accounts/1/ro_containers/18"
+    roboxpasswd="d41d8cd98f00b204e9800998ecf8427e"
+    curl ${roboxid}/force_sync \
          --data-binary @- -H "Content-Type: application/json" <<____endpostdata
         {
-        'password': 'd41d8cd98f00b204e9800998ecf8427e'
+        'password': '${roboxpasswd}'
         }
 ____endpostdata
 }

@@ -17,6 +17,11 @@
 #@@TODO remove this?
 export ARQROOT=$(pwd)/ARQ-*/
 
+#@@TODO more intelligent wait logic
+#@@TODO clean up temporary manifest and query files
+#@@TODO fix up query function
+#@@ TODO factor out elements that should be common across test cases
+
 # ----------------------------------------------------------------
 
 echo "TestCreateRO - START: Test create RO"
@@ -33,9 +38,13 @@ fi
 
 # ----------------------------------------------------------------
 
-echo " - Create local RO instance ${RO}"
+echo " - Create local RO instance ${RO} in ${DropBoxDir}"
 
 mkdir -p ${DropBoxDir}/${RO}
+
+cat >${DropBoxDir}/${RO}/README.txt - <<END
+RO created by TestCreateRO.sh for ROBox testing
+END
 
 # Expected initial manifest @@TODO is this really required?
 cat >${RO}-manifest.rdf - <<END
@@ -70,7 +79,8 @@ END
 echo " - Waiting for SRS to create RO and metadata"
 
 sync_RO_SRS
-sleep 1
+
+sleep 15
 
 # ----------------------------------------------------------------
 

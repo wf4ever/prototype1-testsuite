@@ -17,7 +17,6 @@
 #@@TODO remove this?
 export ARQROOT=$(pwd)/ARQ-*/
 
-#@@TODO more intelligent wait logic
 #@@TODO clean up temporary manifest and query files
 #@@TODO fix up query function
 #@@ TODO factor out elements that should be common across test cases
@@ -76,11 +75,17 @@ END
 
 # ----------------------------------------------------------------
 
-echo " - Waiting for SRS to create RO and metadata"
+echo " - Request SRS to create RO ${RO} and metadata"
 
 sync_RO_SRS
 
-sleep 15
+echo -n "  Waiting for RO metadata to be created..."
+for countdown in 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1; do
+    echo -n " $countdown"
+    sleep 1
+    if [ -e ${DropBoxDir}/${RO}/manifest.rdf ] ; then break ; fi
+done
+echo "."
 
 # ----------------------------------------------------------------
 

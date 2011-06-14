@@ -22,21 +22,7 @@ echo "TestCreateRO - START: Test create RO"
 
 source TestConfig.sh
 
-# Check we've got the right directory
-
-if [[ ! -e ${DropBoxDir}/ROBox-test-directory ]] ; then
-    echo "No sentinel file in DropBox directory: is DropBoxDir set correctly in TestConfig.sh?"
-    exit 1
-fi
-
-# Generate unique name for RO
-
-if (type -P uuidgen 2>/dev/null >/dev/null); then 
-    uuid=$(uuidgen)
-    RO="TestRO-${uuid:0:4}"
-else 
-    RO="TestRO-$$"
-fi
+# RO is set to name for new RO
 
 # ----------------------------------------------------------------
 
@@ -65,16 +51,10 @@ sleep 2
 # ----------------------------------------------------------------
 
 echo " - Request SRS to create RO ${RO} and metadata"
-
 sync_RO_SRS
 
 echo -n "  Waiting for RO metadata to be created..."
-for countdown in 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1; do
-    echo -n " $countdown"
-    sleep 1
-    if [ -e ${DropBoxDir}/${RO}/manifest.rdf ] ; then break ; fi
-done
-echo "."
+wait_for_manifest_rdf
 
 # ----------------------------------------------------------------
 

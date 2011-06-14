@@ -9,8 +9,21 @@
 
 export ARQROOT=$(pwd)/ARQ-2.8.7
 
-#DropBoxDir="./data"
 DropBoxDir="/usr/workspace/prototype1-testsuite/ROSRS_DropBox/Dropbox/prototype1-testsuite"
+
+# Check we've got the right directory
+if [[ ! -e ${DropBoxDir}/ROBox-test-directory ]] ; then
+    echo "No sentinel file in DropBox directory: is DropBoxDir set correctly in TestConfig.sh?"
+    exit 1
+fi
+
+# Generate unique name for RO
+if (type -P uuidgen 2>/dev/null >/dev/null); then 
+    uuid=$(uuidgen)
+    RO="TestRO-${uuid:0:4}"
+else 
+    RO="TestRO-$$"
+fi
 
 # Test Sandbox for ROBox at http://calatola.man.poznan.pl/robox
 #
@@ -47,3 +60,16 @@ function sync_RO_SRS ()
         }
 ____endpostdata
 }
+
+# Wait for manifest to be created in DropBox directory
+function wait_for_manifest_rdf ()
+{
+    for countdown in 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1; do
+        echo -n " $countdown"
+        sleep 1
+        if [ -e ${DropBoxDir}/${RO}/manifest.rdf ] ; then break ; fi
+    done
+    echo "."
+}
+
+# End.

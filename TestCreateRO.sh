@@ -14,11 +14,6 @@
 #   ARQ-2.8.7
 #       for SparQL queries over manifest
 
-#@@TODO remove this?
-export ARQROOT=$(pwd)/ARQ-*/
-
-#@@TODO clean up temporary manifest and query files
-#@@TODO fix up query function
 #@@ TODO factor out elements that should be common across test cases
 
 # ----------------------------------------------------------------

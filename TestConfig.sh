@@ -7,7 +7,8 @@
 #   see http://sourceforge.net/projects/jena/files/ARQ/
 #
 
-ARQROOT="./ARQ-2.8.7/"
+export ARQROOT=$(pwd)/ARQ-2.8.7
+
 #DropBoxDir="./data"
 DropBoxDir="/usr/workspace/prototype1-testsuite/ROSRS_DropBox/Dropbox/prototype1-testsuite"
 

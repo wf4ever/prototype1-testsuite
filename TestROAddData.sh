@@ -85,7 +85,7 @@ sync_RO_SRS
 
 # ----------------------------------------------------------------
 
-echo -n "   waiting for data to show in manifest..."
+echo -n "  waiting for data to show in manifest..."
 
 cat >${RO}-manifest-query.sparql - <<END
 prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#>

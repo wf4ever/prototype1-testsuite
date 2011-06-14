@@ -16,7 +16,7 @@
 
 # ----------------------------------------------------------------
 
-echo "TestCreateRO - START: Test create RO"
+echo "TestROCreate - START: Test create RO"
 
 source TestConfig.sh
 
@@ -30,7 +30,7 @@ echo " - Create local RO instance ${RO} in ${DropBoxDir}"
 mkdir -p ${DropBoxDir}/${RO}
 
 cat >${DropBoxDir}/${RO}/README.txt - <<END
-RO created by TestCreateRO.sh for ROBox testing
+RO created by TestROCreate.sh for ROBox testing
 $(date)
 END
 
@@ -60,12 +60,12 @@ wait_for_manifest_rdf
 echo " - Look for manifest with SRS metadata"
 
 if [ ! -e ${DropBoxDir}/${RO}/manifest.rdf ] ; then
-    echo "TestCreateRO - FAIL: manifest.rdf not created"
+    echo "TestROCreate - FAIL: manifest.rdf not created"
     exit 1
 else
     # test new manifest contents
     if ! arq_query_ask ${DropBoxDir}/${RO}/manifest.rdf ${RO}-manifest-query.sparql ; then
-        echo "TestCreateRO - FAIL: manifest wrong id"
+        echo "TestROCreate - FAIL: manifest wrong id"
         exit 1
     fi
 fi
@@ -73,7 +73,8 @@ fi
 # ----------------------------------------------------------------
 
 rm ${RO}-manifest-query.sparql
-echo "TestCreateRO - SUCCESS"
+rm -rf ${DropBoxDir}/${RO}
+echo "TestROCreate - SUCCESS"
 exit 0
 
 # End.

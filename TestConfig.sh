@@ -45,6 +45,19 @@ function arq_query_ask ()
     #echo "File $1"
     #echo "Query $2"
     ${ARQROOT}/bin/arq --data=$1 --query="$2" --results=JSON | grep -q "\"boolean\" : true"
+    exstatus=$?
+    #echo "Result $exstatus"
+    return $exstatus
+}
+
+# Diagnostic to display result of query
+function arq_query_dump ()
+{
+    echo "File $1"
+    echo "Query $2"
+    echo "--------"
+    ${ARQROOT}/bin/arq --data=$1 --query="$2" --results=JSON
+    echo "--------"
     #echo "Result $?"
 }
 

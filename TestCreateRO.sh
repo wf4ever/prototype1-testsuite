@@ -27,12 +27,20 @@ echo "TestCreateRO - START: Test create RO"
 
 source TestConfig.sh
 
+# Check we've got the right directory
+
+if [[ ! -e ${DropBoxDir}/ROBox-test-directory ]] ; then
+    echo "No sentinel file in DropBox directory: is DropBoxDir set correctly in TestConfig.sh?"
+    exit 1
+fi
+
 # Generate unique name for RO
 
 if (type -P uuidgen 2>/dev/null >/dev/null); then 
-    RO="TestRO$(uuidgen)"
+    uuid=$(uuidgen)
+    RO="TestRO-${uuid:0:4}"
 else 
-    RO="TestRO$$"
+    RO="TestRO-$$"
 fi
 
 # ----------------------------------------------------------------
@@ -43,6 +51,7 @@ mkdir -p ${DropBoxDir}/${RO}
 
 cat >${DropBoxDir}/${RO}/README.txt - <<END
 RO created by TestCreateRO.sh for ROBox testing
+$(date)
 END
 
 # Expected initial manifest @@TODO is this really required?
@@ -104,6 +113,8 @@ fi
 
 # ----------------------------------------------------------------
 
+rm ${RO}-manifest.rdf
+rm ${RO}-manifest-query.sparql
 echo "TestCreateRO - SUCCESS"
 exit 0
 

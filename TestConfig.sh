@@ -30,7 +30,7 @@ function arq_query_ask ()
 {
     #echo "File $1"
     #echo "Query $2"
-    ${ARQROOT}/bin/arq --data=$1 --query= "$2" --results=JSON | grep -q "\"boolean\" : true"
+    ${ARQROOT}/bin/arq --data=$1 --query="$2" --results=JSON | grep -q "\"boolean\" : true"
     #echo "Result $?"
 }
 

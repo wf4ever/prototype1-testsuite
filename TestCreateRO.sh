@@ -14,15 +14,14 @@
 #   ARQ-2.8.7
 #       for SparQL queries over manifest
 
-#@@ TODO factor out elements that should be common across test cases
-
 # ----------------------------------------------------------------
 
 echo "TestCreateRO - START: Test create RO"
 
 source TestConfig.sh
 
-# RO is set to name for new RO
+# DropBoxDir    is location where ROs are created
+# RO            is set to name for new RO
 
 # ----------------------------------------------------------------
 
